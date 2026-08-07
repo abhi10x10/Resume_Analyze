@@ -1,28 +1,53 @@
 def resume_prompt(resume_text):
-
     return f"""
-    You are an HR Expert.
+You are an expert HR recruiter and ATS resume reviewer.
 
-    Analyze this resume.
+Analyze the following resume.
 
-    Resume:
+Resume:
+{resume_text}
 
-    {resume_text}
+Return ONLY valid JSON.
 
-    Give
+Do NOT use markdown.
+Do NOT write ```json.
+Do NOT add explanations.
+Do NOT write anything outside the JSON.
 
-    Summary
+The response MUST exactly follow this structure:
 
-    Skills
+{{
+  "summary": "A short professional summary.",
+  "skills": {{
+    "technical": [
+      "Skill 1",
+      "Skill 2"
+    ],
+    "soft": [
+      "Skill 1",
+      "Skill 2"
+    ]
+  }},
+  "weaknesses": [
+    "Weakness 1",
+    "Weakness 2"
+  ],
+  "suggestions": [
+    "Suggestion 1",
+    "Suggestion 2"
+  ],
+  "rating": 8.5,
+  "recommendation": "One sentence hiring recommendation."
+}}
 
-    Weaknesses
+Important rules:
 
-    Suggestions
+- technical must ALWAYS be an array.
+- soft must ALWAYS be an array.
+- weaknesses must ALWAYS be an array.
+- suggestions must ALWAYS be an array.
+- rating must be a number between 1 and 10.
+- recommendation must be a string.
 
-    OUTPUT:
-    Return ONLY valid JSON.
-    Do not use markdown.
-    Do not write ```json.
-    Do not add any explanation.
-    you have to give the output in JSON format with keys as summary, skills, weaknesses and suggestions.    
-    """
+Return ONLY JSON.
+"""
