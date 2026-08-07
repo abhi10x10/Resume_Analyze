@@ -14,7 +14,7 @@ function App() {
     formData.append("resume", file);
 
     try {
-      const response = await fetch("https://resume-analyze-os45.onrender.com", {
+      const response = await fetch("https://resume-analyze-os45.onrender.com/upload", {
         method: "POST",
         body: formData,
       });
