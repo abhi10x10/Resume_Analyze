@@ -37,7 +37,16 @@ async def upload_resume(resume: UploadFile = File(...)):
 
     try:
         text = extract_text(file_path)
-
+        if not text.strip():
+            raise HTTPException(
+                status_code=400,
+                detail="The uploaded PDF is empty or contains no readable text."
+            )
+        if len(text.strip()) < 30:
+            raise HTTPException(
+                status_code=400,
+                detail="Resume text is too short. Please upload a valid resume."
+            )
         analysis = analyze(text)
 
         return {

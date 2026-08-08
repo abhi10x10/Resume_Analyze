@@ -25,7 +25,10 @@ function App() {
           body: formData,
         }
       );
-
+      if (!response.ok) {
+        alert(data.detail);
+        return;
+      }
       const data = await response.json();
 
       setAnalysis(data.analysis);
